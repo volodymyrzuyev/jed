@@ -15,5 +15,38 @@ public class Input{
         this.department = department;
       }
 
+      public int getId() {
+           return id;
+      }
+
+      public void updateSalary(double newSalary){
+        this.salary = newSalary;
+      }
      
+      public void updateDepartment(String newDepartment){
+        this.department = newDepartment;
+      }
+
+      public double calculatePay() {
+          return salary / 12; //Monthly salary
+      }
+
+      public void displayEmployeeInfo() {
+        System.out.println("Employee ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: $" + salary);
+        System.out.println("Department: " + department);
+      }
+
+      public void addEmployee(Employee emp) {
+        employees.add(emp);
+    }
+
+    public void displayDepartmentInfo() {
+        System.out.println("Department: " + name);
+        System.out.println("Employees:");
+        for (Employee emp : employees) {
+            System.out.println("- " + emp.getId() + ": " + emp.calculatePay());
+        }
+    }
 }
