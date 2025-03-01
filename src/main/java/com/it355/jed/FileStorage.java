@@ -4,11 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class FileStorage implements Serializable{
+    //serializationUID
+    private static final long serializationUID = 1L;
+
     //Objects for making timestamps
     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
     String timestamp = format.format(new Date());
     
-    //StoreFile method serializes objects in .dat file. Creates a new file every time it's called by using timestamps. 
+    /**
+     * Stores serialized objects in a file in a unique file. This method will never overwrite any previously
+     * stored file.
+     * @param employees
+     */ 
     private void storeFile(ArrayList<Employee> employees){
         File filename = new File("employees_" + timestamp + ".dat");
         //Serialize objects
