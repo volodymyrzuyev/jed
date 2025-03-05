@@ -16,7 +16,7 @@ public class FileStorage implements Serializable{
      * stored file.
      * @param employees
      */ 
-    private void storeFile(ArrayList<Employee> employees){
+    public void storeFile(ArrayList<Employee> employees){
         File filename = new File("employees_" + timestamp + ".dat");
         //Serialize objects
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
