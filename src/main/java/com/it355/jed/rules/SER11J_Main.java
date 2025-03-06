@@ -8,7 +8,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 
-public class SER11J_Main implements Externalizable {
+public class SER11J_Main extends FIO14J_Main implements Externalizable, Cloneable {
     Boolean isInitialized = false;
 
     public String UUID;
@@ -26,6 +26,10 @@ public class SER11J_Main implements Externalizable {
         }
         UUID = in.readLine();
         isInitialized = true;
+    }
+
+    public SER11J_Main clone() {
+        return super.clone();
     }
 
     public static void main(String[] args) throws Exception {
