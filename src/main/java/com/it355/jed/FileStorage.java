@@ -5,22 +5,23 @@ import java.util.*;
 
 public class FileStorage implements Serializable{
     //serializationUID
-    private static final long serializationUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     //Objects for making timestamps
     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
     String timestamp = format.format(new Date());
     
     /**
-     * Stores serialized objects in a file in a unique file. This method will never overwrite any previously
+     * Stores serialized objects from employee list and deparment list in a unique file. This method will never overwrite any previously
      * stored file.
      * @param employees
      */ 
-    public void storeFile(ArrayList<Employee> employees){
+    public void storeFile(ArrayList<Employee> employees, HashMap<String, EmployeeList> dptList){
         File filename = new File("employees_" + timestamp + ".dat");
         //Serialize objects
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(employees);
+            oos.writeObject(dptList);
         } catch (Exception e) {
             e.printStackTrace();
         }
