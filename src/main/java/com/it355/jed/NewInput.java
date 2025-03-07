@@ -1,5 +1,6 @@
 package com.it355.jed;
 
+import java.text.Normalizer.Form;
 import java.util.*;
 
 public class NewInput {
@@ -21,7 +22,11 @@ public class NewInput {
             System.out.println("6. Store file");
             System.out.println("7. Restore file");
             System.out.println("8. Exit");
-            int choice = scanner.nextInt();
+            String choiceStr = scanner.nextLine();
+            // STR02J, IDS01J
+            choiceStr = java.text.Normalizer.normalize(choiceStr.toUpperCase(Locale.ENGLISH), Form.NFKC);
+            // IDS16J
+            int choice = Integer.parseInt(choiceStr);
             scanner.nextLine();
 
             switch (choice) {

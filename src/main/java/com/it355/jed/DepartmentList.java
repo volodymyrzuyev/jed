@@ -6,25 +6,34 @@ import java.util.HashMap;
 
 public class DepartmentList implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     public HashMap<String, EmployeeList> departments;
     public ArrayList<Employee> allEmps;
 
+    /**
+     * Creates an {@link ArrayList} and {@link HashMap} to store employees
+     */
     DepartmentList() {
         this.departments = new HashMap<String, EmployeeList>();
         this.allEmps = new ArrayList<Employee>();
     }
 
-    public void addEmployee(String firstName, String lastName, int id, String address, String department, Double wage) {
-        Employee emp = new Employee(firstName, lastName, id, address, department, wage);
-        addEmployee(emp);
-    }
-
+    /**
+     * Add the Employee to the {@link DepartmentList}
+     * 
+     * @param emp {@link Employee} to be added
+     */
     public void addEmployee(Employee emp) {
         EmployeeList empList = getEmployeeList(emp.getDepartment());
-        addEmp(emp, empList);
+        allEmps.add(emp);
+        empList.addEmployee(emp);
     }
 
+    /**
+     * Return the {@link Employee} with a given Employee ID
+     *
+     * @param empID ID of the {@link Employee} you want to find
+     */
     public Employee findEmployee(int empID) {
         for (int i = 0; i < allEmps.size(); i++) {
             if (allEmps.get(i).getID() == empID) {
@@ -34,6 +43,9 @@ public class DepartmentList implements Serializable {
         return null;
     }
 
+    /**
+     * Returns a string of the DepartmentList tree structure
+     */
     public String printTree() {
         String out = "";
 
@@ -45,6 +57,9 @@ public class DepartmentList implements Serializable {
         return out;
     }
 
+    /**
+     * Retruns a string of all employees added to the list
+     */
     public String toString() {
         String out = "";
 
@@ -55,6 +70,11 @@ public class DepartmentList implements Serializable {
         return out;
     }
 
+    /**
+     * Retruns all employees in a given department
+     *
+     * @param department Name of the department you want
+     */
     private EmployeeList getEmployeeList(String department) {
         if (!departments.containsKey(department)) {
             departments.put(department, new EmployeeList());
@@ -63,8 +83,4 @@ public class DepartmentList implements Serializable {
         return departments.get(department);
     }
 
-    private void addEmp(Employee emp, EmployeeList empl) {
-        allEmps.add(emp);
-        empl.addEmployee(emp);
-    }
 }
