@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DepartmentList {
-    private HashMap<String, EmployeeList> departments;
-    private ArrayList<Employee> allEmps;
+    public HashMap<String, EmployeeList> departments;
+    public ArrayList<Employee> allEmps;
 
     DepartmentList() {
         this.departments = new HashMap<String, EmployeeList>();

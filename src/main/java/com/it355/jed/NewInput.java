@@ -2,24 +2,25 @@ package com.it355.jed;
 
 import java.util.*;
 
-
 public class NewInput {
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Employee> employees = new ArrayList<>();
-        ArrayList<DepartmentList> departments = new ArrayList<>();
+        DepartmentList deptLI = new DepartmentList();
         FileStorage fileStorage = new FileStorage();
-        
+        FileRetreival fileRetrival = new FileRetreival();
+        String latestFile = "";
+
         while (true) {
             System.out.println("Choose an option:");
             System.out.println("1. Add Employee");
             System.out.println("2. Update Salary");
             System.out.println("3. Update Department");
             System.out.println("4. Display Employee Info");
-            System.out.println("5. Display Department Info");
-            System.out.println("6. Exit");
+            System.out.println("5. Display Company tree");
+            System.out.println("6. Store file");
+            System.out.println("7. Restore file");
+            System.out.println("8. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -28,86 +29,71 @@ public class NewInput {
                     System.out.print("Enter Employee ID: ");
                     int id = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Enter Name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter Salary: ");
-                    double wage = scanner.nextDouble();
-                    scanner.nextLine();
+                    System.out.print("Enter First Name: ");
+                    String firstName = scanner.nextLine();
+                    System.out.print("Enter Last Name: ");
+                    String lastName = scanner.nextLine();
+                    System.out.print("Enter Address: ");
+                    String address = scanner.nextLine();
                     System.out.print("Enter Department: ");
                     String dept = scanner.nextLine();
-                    
-                    Employee emp = new Employee(id, name, wage, dept);
-                    employees.add(emp);
+                    System.out.print("Enter Wage: ");
+                    double wage = scanner.nextDouble();
 
-                    DepartmentList dpt = findDepartment(departments, dept);
-                    if (dpt == null) {
-                        dpt = new DepartmentList(dept);
-                        departments.add(dpt);
-                    }
-                    dpt.addEmployee(emp);
+                    Employee emp = new Employee(firstName, lastName, id, address, dept, wage);
+                    deptLI.addEmployee(emp);
                     System.out.println("Employee added successfully!");
                     break;
                 case 2:
                     System.out.print("Enter Employee ID to update salary: ");
                     id = scanner.nextInt();
-                    Employee employee = findEmployee(employees, id);
+                    Employee employee = deptLI.findEmployee(id);
                     if (employee != null) {
-                      System.out.print("Enter new salary: ");
-                      double newSalary = scanner.nextDouble();
-                      employee.updateSalary(newSalary);
-                      System.out.println("Salary updated successfully!");
-                      } else {
-                      System.out.println("Employee not found.");
-                      }
+                        System.out.print("Enter new wage: ");
+                        double newWage = scanner.nextDouble();
+                        employee.setWage(newWage);
+                        System.out.println("Salary updated successfully!");
+                    } else {
+                        System.out.println("Employee not found.");
+                    }
                     break;
                 case 3:
                     System.out.print("Enter Employee ID to update department: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
 
-                    employee = findEmployee(employees, id);
+                    employee = deptLI.findEmployee(id);
                     if (employee != null) {
-                      System.out.print("Enter new department: ");
-                      String newDptName = scanner.nextLine();
-                      DepartmentList newDpt = findDepartment(departments, newDptName);
-                      if (newDept == null) {
-                          newDept = new DepartmentList(newDeptName);
-                          departments.add(newDpt);
-                      }
-                      employee.updateDepartment(newDptName);
-                      newDpt.addEmployee(employee);
-                      System.out.println("Department updated successfully!");
-                      } else {
-                      System.out.println("Employee not found.");
-                      }
+                        System.out.print("Enter new department: ");
+                        String newDptName = scanner.nextLine();
+                        employee.setDepartment(newDptName);
+                        deptLI.addEmployee(employee);
+                        System.out.println("Department updated successfully!");
+                    } else {
+                        System.out.println("Employee not found.");
+                    }
                     break;
                 case 4:
                     System.out.print("Enter Employee ID to display info: ");
                     id = scanner.nextInt();
-                    employee = findEmployee(employees, id);
+                    employee = deptLI.findEmployee(id);
                     if (employee != null) {
-                      employee.displayEmployeeInfo();
+                        System.out.print(employee.toString() + "\n");
                     } else {
-                      System.out.println("Employee not found.");
+                        System.out.println("Employee not found.");
                     }
                     break;
                 case 5:
                     System.out.print("Enter Department name: ");
-                    String deptName = scanner.nextLine();
-                    DepartmentList department = findDepartment(departments, deptName);
-                    if (dpt != null) {
-                      department.displayDepartmentInfo();
-                    } else {
-                      System.out.println("Department not found.");
-                    }
-                  break;
-                 case 6:
+                    System.out.print(deptLI.printTree() + "\n");
+                    break;
+                case 6:
                     System.out.println("Storing file");
-                    fileStorage.storeFile(employees);
-                  break;
-                 case 7:
-                    System.out.println("Storing file");
-                    
+                    latestFile = fileStorage.storeFile(deptLI.allEmps, deptLI.departments);
+                    break;
+                case 7:
+                    System.out.println("Restoring file");
+                    fileRetrival.RetreiveEmployees(latestFile);
                 case 8:
                     System.out.println("Exiting");
                     scanner.close();
