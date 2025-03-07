@@ -1,9 +1,12 @@
 package com.it355.jed;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DepartmentList {
+public class DepartmentList implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     public HashMap<String, EmployeeList> departments;
     public ArrayList<Employee> allEmps;
 

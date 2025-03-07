@@ -1,8 +1,9 @@
 package com.it355.jed;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EmployeeList {
+public class EmployeeList implements Serializable{
     private ArrayList<Employee> employees;
 
     EmployeeList() {

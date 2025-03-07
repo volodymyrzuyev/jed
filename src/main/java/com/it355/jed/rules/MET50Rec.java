@@ -3,7 +3,6 @@ package com.it355.jed.rules;
 //Matt Holliday
 
 public class MET50Rec {
-   
    /**
     * Divides using doubles. Avoids using confusing uses of overloading
     * @param a
@@ -14,7 +13,6 @@ public class MET50Rec {
    {
       return a/b;
    }  
-
    /**
     * divides using ints. Avoids using confusing uses of overloading
     * @param a
@@ -25,7 +23,6 @@ public class MET50Rec {
    {
       return a/b;
    }
-    
 
 
    public static void main(String[] args) {
