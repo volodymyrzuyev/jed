@@ -30,7 +30,7 @@ final class OBJ01_LimitedBank {
 final class OBJ01_Main
 {
     //main method
-    public static void main()
+    public static void main(String args [])
     {
         OBJ01_LimitedBank b = new OBJ01_LimitedBank();
         b.setBalance(100);
