@@ -139,7 +139,7 @@ public class Employee implements Serializable {
      * Displays employee info
      */
     public String toString() {
-        return String.format("Name: %s %s, ID: %d, Department: %s, Manages: %sLives At: %sMakes: %.2f$ per hour",
+        return String.format("Name: %s %s, ID: %d, Department: %s, Manages: %sLives At: %s Makes: %.2f$ per hour",
                 firstName,
                 lastName, empId, department, managmentList.getListNames(), address, wage);
 

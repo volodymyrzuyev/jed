@@ -75,7 +75,7 @@ public class DepartmentList implements Serializable {
      *
      * @param department Name of the department you want
      */
-    private EmployeeList getEmployeeList(String department) {
+    public EmployeeList getEmployeeList(String department) {
         if (!departments.containsKey(department)) {
             departments.put(department, new EmployeeList());
         }
