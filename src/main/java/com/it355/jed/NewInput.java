@@ -1,13 +1,17 @@
+package com.it355.jed;
+
 import java.util.*;
 
-public class Input {
+
+public class NewInput {
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Employee> employees = new ArrayList<>();
-        List<Department> departments = new ArrayList<>();
+        ArrayList<Employee> employees = new ArrayList<>();
+        ArrayList<DepartmentList> departments = new ArrayList<>();
         FileStorage fileStorage = new FileStorage();
         
-
         while (true) {
             System.out.println("Choose an option:");
             System.out.println("1. Add Employee");
@@ -27,16 +31,17 @@ public class Input {
                     System.out.print("Enter Name: ");
                     String name = scanner.nextLine();
                     System.out.print("Enter Salary: ");
-                    double salary = scanner.nextDouble();
+                    double wage = scanner.nextDouble();
                     scanner.nextLine();
                     System.out.print("Enter Department: ");
                     String dept = scanner.nextLine();
                     
-                    Employee emp = new Employee(id, name, salary, dpt);
+                    Employee emp = new Employee(id, name, wage, dept);
                     employees.add(emp);
-                    Department dpt = findDepartment(departments, dptName);
+
+                    DepartmentList dpt = findDepartment(departments, dept);
                     if (dpt == null) {
-                        dpt = new Department(dptName);
+                        dpt = new DepartmentList(dept);
                         departments.add(dpt);
                     }
                     dpt.addEmployee(emp);
@@ -59,12 +64,14 @@ public class Input {
                     System.out.print("Enter Employee ID to update department: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
+
+                    employee = findEmployee(employees, id);
                     if (employee != null) {
                       System.out.print("Enter new department: ");
                       String newDptName = scanner.nextLine();
-                      Department newDpt = findDepartment(departments, newDptName);
-                      if (newDpt == null) {
-                          newDpt = new Department(newDptName);
+                      DepartmentList newDpt = findDepartment(departments, newDptName);
+                      if (newDept == null) {
+                          newDept = new DepartmentList(newDeptName);
                           departments.add(newDpt);
                       }
                       employee.updateDepartment(newDptName);
@@ -86,10 +93,10 @@ public class Input {
                     break;
                 case 5:
                     System.out.print("Enter Department name: ");
-                    dptName = scanner.nextLine();
-                    dept = findDepartment(departments, dptName);
+                    String deptName = scanner.nextLine();
+                    DepartmentList department = findDepartment(departments, deptName);
                     if (dpt != null) {
-                      dept.displayDepartmentInfo();
+                      department.displayDepartmentInfo();
                     } else {
                       System.out.println("Department not found.");
                     }
@@ -99,7 +106,7 @@ public class Input {
                     fileStorage.storeFile(employees);
                   break;
                  case 7:
-                    System.out.println("Storing file") 
+                    System.out.println("Storing file");
                     
                 case 8:
                     System.out.println("Exiting");
