@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class FileRetreival implements Serializable{
 
@@ -13,11 +14,12 @@ public class FileRetreival implements Serializable{
      * @param fileName the name of a serialized file to be read
      * @return an EmployeeList object
      */
-    public EmployeeList RetreiveEmployees(String fileName){
+    public ArrayList<Employee> RetreiveEmployees(String fileName){
         File file = new File(fileName);
-        EmployeeList employeeList = new EmployeeList();
+        //EmployeeList employeeList = new EmployeeList();
+        ArrayList<Employee> employeeList = new ArrayList<>();
         try(ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(file))){
-            employeeList = (EmployeeList) inFile.readObject();
+            employeeList = (ArrayList<Employee>) inFile.readObject();
         }
         catch(IOException | ClassNotFoundException e){
             System.out.println("Could not open or read the file into an EmployeeList object");
