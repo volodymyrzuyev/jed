@@ -28,9 +28,11 @@ public class NewInput {
             int choice = scanner.nextInt();
 
             switch (choice) {
+                //Add Employee
                 case 1:
                     addEmp(scanner, deptLI);
                     break;
+                //Update the salary for employee
                 case 2:
                     System.out.print("Enter Employee ID to update salary: ");
                     int id = scanner.nextInt();
@@ -44,6 +46,7 @@ public class NewInput {
                         System.out.println("Employee not found.");
                     }
                     break;
+                //Update the department for specified employee
                 case 3:
                     System.out.print("Enter Employee ID to update department: ");
                     id = scanner.nextInt();
@@ -60,6 +63,7 @@ public class NewInput {
                         System.out.println("Employee not found.");
                     }
                     break;
+                //Display Employee info
                 case 4:
                     System.out.print("Enter Employee ID to display info: ");
                     id = scanner.nextInt();
@@ -75,7 +79,7 @@ public class NewInput {
                     System.out.println("3. Add employee to manage.");
 
                     choice = scanner.nextInt();
-
+                    //switch statement for nested actions 
                     switch (choice) {
                         case 1:
                             System.out.println(employee.managmentTree(""));
@@ -95,18 +99,28 @@ public class NewInput {
                     }
 
                     break;
+                //Dispaly department employees
                 case 5:
                     System.out.print("Enter Department name: ");
+                    scanner.nextLine();
                     String dept = scanner.nextLine();
                     System.out.print(deptLI.getEmployeeList(dept).toString() + "\n");
                     break;
+                //Serialize the file
                 case 6:
                     System.out.println("Storing file");
                     latestFile = fileStorage.storeFile(deptLI.allEmps, deptLI.departments);
                     break;
+                //Deserialize and display
                 case 7:
                     System.out.println("Restoring file");
-                    fileRetrival.RetreiveEmployees(latestFile);
+                    ArrayList<Employee> retrievedEmployees = fileRetrival.RetreiveEmployees(latestFile);
+                    for(Employee emp : retrievedEmployees)
+                    {
+                        System.out.println(emp.toString());
+                    }
+                    break;
+                //Exit
                 case 8:
                     System.out.println("Exiting");
                     scanner.close();
